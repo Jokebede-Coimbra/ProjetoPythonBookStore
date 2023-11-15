@@ -8,19 +8,19 @@ class ProductService:
         self.product_repository_interface = product_repository_interface
  
   
-    def create_product(self, product: Product) -> None:
+    def create_product(self, product: Product):
         
         self.product_repository_interface.append_product(product)
         self.product_image_interface.put_product_file(product.id, product.image)
 
-    def update_product(self, id: str, updated_product: Product) -> bool:
+    def update_product(self, id: str, updated_product: Product):
        
         if self.product_repository_interface.update_product(id, updated_product):
             self.product_image_interface.replace_product_file(id, updated_product.image)
             return True
         return None
 
-    def delete_product(self, id: str) -> bool:
+    def delete_product(self, id: str):
         
         if self.product_repository_interface.delete_product(id):
             self.product_image_interface.remove_product_file(id)
