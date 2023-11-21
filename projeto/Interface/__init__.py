@@ -1,2 +1,0 @@
-# from product_repository_interface import ProductRepositoryInterface
-# from product_image_interface import ProductImageInterface 
