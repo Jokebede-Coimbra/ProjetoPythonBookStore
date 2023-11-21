@@ -1,6 +1,11 @@
 {
     "python.analysis.extraPaths": [
         "./Entity",
-        "./Interface"
+        "./Interface",
+        "./Console",
+        "./Facade",
+        "./Services",
+        "./Facade",
+        "./Facade"
     ]
 }

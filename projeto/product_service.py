@@ -12,7 +12,7 @@ class ProductService:
         
         self.product_repository_interface.append_product(product)
         self.product_image_interface.put_product_file(product.id, product.image)
-
+        return "Product created successfully!"
     def update_product(self, id: str, updated_product: Product):
        
         if self.product_repository_interface.update_product(id, updated_product):

@@ -1,4 +1,6 @@
 from product import Product
+# from product_folder_interface import ProductFolderInterface
+from product_image_interface import ProductImageInterface
 from product_repository_interface import ProductRepositoryInterface
 
 class ProductFolderRepository(ProductRepositoryInterface):
@@ -8,12 +10,13 @@ class ProductFolderRepository(ProductRepositoryInterface):
       
     def append_product(self, product: Product) -> None:
        self.products.append(product)
-       
+   
     def update_product(self, id:str, product: Product) -> None:
-        if id in self.products:
-            self.products[id] = product
-            return True
-        return False
+        for product in  self.products:
+            if product.id == id:
+                return product
+            
+            return None
     
     def delete_product(self, id:str) -> None:
         if id in self.products:

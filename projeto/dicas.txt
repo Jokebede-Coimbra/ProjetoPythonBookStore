@@ -1,0 +1,29 @@
+[09:03, 11/17/2023] Jefte: Ai
+[09:03, 11/17/2023] Jefte: Q vem o pulo do gato
+[09:03, 11/17/2023] Jefte: Eu fiz base64 por uma 'limitacao'
+[09:03, 11/17/2023] Jefte: No caso do console
+[09:04, 11/17/2023] Jefte: Da pra enviar o caminho do arquivo local
+[09:04, 11/17/2023] Jefte: Transformar ele em stream e colocar na pasta
+
+[09:04, 11/17/2023] Jefte: Do lambda
+[09:04, 11/17/2023] Jefte: Mas reparem 1 detalhe
+[09:05, 11/17/2023] Jefte: O contrato no facada não deve mudar
+[09:05, 11/17/2023] Jefte: E lembrem-se que vcs precisam armazenar a imagem e recuperar depois pra exibir
+
+C:\Users\jkbd_\Pictures\2020-01\IMG_20200128_094200_338.jpg
+
+
+Obtenha o Caminho do Arquivo Local:
+
+Receba o caminho do arquivo local do usuário como uma entrada.
+Leia o Conteúdo do Arquivo:
+
+Use a biblioteca open para ler o conteúdo do arquivo.
+Transforme em Stream:
+
+Converta o conteúdo do arquivo em um formato adequado para ser enviado como um fluxo. Uma maneira comum é usar o módulo io para criar um objeto BytesIO.
+Salve na Pasta:
+
+Utilize o caminho do arquivo desejado e salve o fluxo na pasta desejada usando o código existente.
+
+

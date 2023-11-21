@@ -1,13 +1,12 @@
-from Services.product_service import ProductService
+from product_service import ProductService
 
 class Facade:
     
     def __init__(self, product_service: ProductService):
       self.product_service = product_service
       
-      
     def product_create(self, product):
-        self.product_service.create_product(product)
+       return self.product_service.create_product(product)
         
     def product_update(self, id, up_product):
         self.product_service.update_product(id, up_product)
