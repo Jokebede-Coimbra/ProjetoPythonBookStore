@@ -6,6 +6,7 @@
         "./Facade",
         "./Services",
         "./Facade",
-        "./Facade"
+        "./Facade",
+        "./entities"
     ]
 }
