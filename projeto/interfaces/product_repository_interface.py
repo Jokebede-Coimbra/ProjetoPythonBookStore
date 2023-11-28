@@ -10,9 +10,9 @@ class ProductRepositoryInterface(ABC):
         pass
 
     @abstractmethod
-    def update(self, id: str, product: Product) -> None:
+    def update(self, id: str, product: Product) -> bool:
         pass
 
     @abstractmethod
-    def delete(self, id: str) -> None:
+    def delete(self, id: str) -> bool:
         pass

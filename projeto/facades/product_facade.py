@@ -13,7 +13,7 @@ class ProductFacade:
 
     def update(self, id, up_product: Product, updated_image: BytesIO):
         self.product_service.update(id, up_product, updated_image)
-
+        
     def delete(self, id: str):
         self.product_service.delete(id)
           
