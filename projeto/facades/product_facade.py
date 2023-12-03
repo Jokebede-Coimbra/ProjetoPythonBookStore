@@ -12,8 +12,8 @@ class ProductFacade:
         return self.product_service.create(product, image)
 
     def update(self, id, up_product: Product, updated_image: BytesIO):
-        self.product_service.update(id, up_product, updated_image)
+        return self.product_service.update(id, up_product, updated_image)
         
     def delete(self, id: str):
-        self.product_service.delete(id)
+        return self.product_service.delete(id)
           

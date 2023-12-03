@@ -14,8 +14,7 @@ class ProductS3Repository(ProductImageInterface):
         self.s3_client.put_object(
             Bucket=self.bucket_name,
             Key=file_name,
-            Body=image.getvalue(),
-            ContentType='image/jpg'  
+            Body=image
         )
 
     def replace(self, file_name: str, new_image: BytesIO) -> None:
