@@ -104,7 +104,7 @@ def delete_handler(event, context):
 
     response = {
         "statusCode": 200,
-        "body": json.dumps(f"Product deletado successfully {product_id}!"),
+        "body": json.dumps(f"Product deleted successfully {product_id}!"),
     }
 
     return response
