@@ -49,6 +49,22 @@ class ProductDynamodbRepository(ProductRepositoryInterface):
             updated_attributes['price'],
             updated_attributes['file_name']
     )
+    
+    def get(self, id: str) -> Product:
+        response = self.table.get_item(Key={'Id': id})
+        item = response.get('Item')
+
+        if item:
+            return Product(
+                item['Id'],
+                item.get('name'),
+                item.get('author'),
+                item.get('rating'),
+                item.get('price'),
+                item.get('file_name')
+            )
+        return None
+            
     def delete(self, id: str) -> None:
         response = self.table.delete_item(Key={'Id': id})
         return response

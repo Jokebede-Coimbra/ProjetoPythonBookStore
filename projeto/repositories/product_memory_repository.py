@@ -16,7 +16,17 @@ class ProductMemoryRepository(ProductRepositoryInterface):
 
         return None
 
-    def delete(self, id: str) -> None:
-        if id in self.products:
-            del self.products[id]
+    def get(self, id: str) -> Product:
+        for product in self.products:
+            if product.id == id:
+                return product
+
+        return None
+    
+    def delete(self, id: str) -> bool:
+        for i, product in enumerate(self.products):
+            if product.id == id:
+                del self.products[i]
+                return True
         return False
+    

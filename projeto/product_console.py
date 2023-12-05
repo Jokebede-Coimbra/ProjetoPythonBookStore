@@ -18,6 +18,13 @@ product_service: ProductService = ProductService(
     product_dynamodb_repository, product_s3_repository
 )
 product_facade: ProductFacade = ProductFacade(product_service)
+'''
+product_memory_repository: ProductMemoryRepository = ProductMemoryRepository()
+product_local_image_repository: ProductLocalImageRepository = ProductLocalImageRepository()
+product_service: ProductService = ProductService(
+    product_memory_repository, product_local_image_repository)
+product_facade: ProductFacade = ProductFacade(product_service)
+'''
 
 
 def display_menu():
@@ -29,6 +36,8 @@ def display_menu():
     print("4. Sair")
     print("========================")
 
+   
+
 
 def get_input_product():
     id = uuid.uuid4().hex
@@ -39,7 +48,7 @@ def get_input_product():
     image_path = input("Digite o caminho da imagem do livro: ")
 
     with open(image_path, "rb") as f:
-        # image: BytesIO = f.read()
+        #image: BytesIO = f.read()
         image = BytesIO(f.read())
         extension = os.path.splitext(f.name)[1]
         file_name = f"{id}{extension}"

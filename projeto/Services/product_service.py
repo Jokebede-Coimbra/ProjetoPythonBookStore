@@ -24,10 +24,12 @@ class ProductService:
             return True
 
         return None
-
-    def delete(self, id: str):
-        if self.product_repository_interface.delete(id):
-            self.product_image_interface.remove(id)
+    
+    def delete(self, id: str) -> bool:
+        product = self.product_repository_interface.get(id)
+        if product:
+            self.product_repository_interface.delete(id)
+            self.product_image_interface.remove(product.file_name)
             return True
 
-        return None
+        return False
