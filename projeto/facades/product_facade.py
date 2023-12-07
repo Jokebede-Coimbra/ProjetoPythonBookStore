@@ -13,6 +13,9 @@ class ProductFacade:
 
     def update(self, id, up_product: Product, updated_image: BytesIO):
         return self.product_service.update(id, up_product, updated_image)
+    
+    def get_by_id(self, id: str):
+        return self.product_service.get_by_id(id)
         
     def delete(self, id: str):
         return self.product_service.delete(id)

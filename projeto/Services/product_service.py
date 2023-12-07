@@ -25,8 +25,11 @@ class ProductService:
 
         return None
     
+    def get_by_id(self, id: str) -> Product:
+        return self.product_repository_interface.get_by_id(id)
+            
     def delete(self, id: str) -> bool:
-        product = self.product_repository_interface.get(id)
+        product = self.product_repository_interface.get_by_id(id)
         if product:
             self.product_repository_interface.delete(id)
             self.product_image_interface.remove(product.file_name)

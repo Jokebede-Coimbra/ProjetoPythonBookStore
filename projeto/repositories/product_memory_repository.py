@@ -16,7 +16,7 @@ class ProductMemoryRepository(ProductRepositoryInterface):
 
         return None
 
-    def get(self, id: str) -> Product:
+    def get_by_id(self, id: str) -> Product:
         for product in self.products:
             if product.id == id:
                 return product

@@ -9,7 +9,7 @@ class ProductLocalImageRepository(ProductImageInterface):
 
     def put(self, file_name: str, image: BytesIO) -> None:
         with open(file_name, "wb") as file:
-            file.write(image)
+            file.write(image.getvalue())
 
     def replace(self, file_name: str, image: BytesIO) -> None:
         if Path(file_name).exists():

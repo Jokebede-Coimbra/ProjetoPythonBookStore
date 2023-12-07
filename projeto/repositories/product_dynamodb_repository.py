@@ -16,6 +16,7 @@ class ProductDynamodbRepository(ProductRepositoryInterface):
 
     def update(self, id: str, updated_product: Product) -> Product:
         update_expression = "SET #name = :name, #author = :author, #rating = :rating, #price = :price, #file_name = :file_name"
+        
         expression_attribute_values = {
             ':name': updated_product.name,
             ':author': updated_product.author,
@@ -23,6 +24,7 @@ class ProductDynamodbRepository(ProductRepositoryInterface):
             ':price': updated_product.price,
             ':file_name': updated_product.file_name
         }
+        
         expression_attribute_names = {
             '#name': 'name',
             '#author': 'author',
@@ -50,7 +52,7 @@ class ProductDynamodbRepository(ProductRepositoryInterface):
             updated_attributes['file_name']
     )
     
-    def get(self, id: str) -> Product:
+    def get_by_id(self, id: str) -> Product:
         response = self.table.get_item(Key={'Id': id})
         item = response.get('Item')
 
@@ -68,3 +70,4 @@ class ProductDynamodbRepository(ProductRepositoryInterface):
     def delete(self, id: str) -> None:
         response = self.table.delete_item(Key={'Id': id})
         return response
+        

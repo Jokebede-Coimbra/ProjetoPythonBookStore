@@ -14,5 +14,9 @@ class ProductRepositoryInterface(ABC):
         pass
 
     @abstractmethod
+    def get_by_id(self, id: str) -> Product:
+        pass
+    
+    @abstractmethod
     def delete(self, id: str) -> bool:
         pass

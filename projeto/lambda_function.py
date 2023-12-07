@@ -59,16 +59,16 @@ def insert_handler(event, context):
 
 
 def update_handler(event, context):
-    body = event
+    body = json.loads(event["body"])
 
-    id = body["Id"]
-    file_name = body["fileName"]
+    id = body.get("Id")
+    file_name = body.get("file_name")
     product_dict = {
         "Id": id,
-        "Name": body["name"],
-        "Rating": str(body["rating"]),
-        "Author": body["author"],
-        "Price": str(body["price"]),
+        "Name": body.get("name"),
+        "Rating": str(body.get("rating")),
+        "Author": body.get("author"),
+        "Price": str(body.get("price")),
         "FileName": file_name,
     }
 
@@ -90,6 +90,19 @@ def update_handler(event, context):
     response = {
         "statusCode": 200,
         "body": json.dumps(f"Product updated successfully {product}!"),
+    }
+
+    return response
+
+
+def get_by_id_handler(event, context):
+    product_id = event["pathParameters"]["id"]
+
+    product = product_facade.get_by_id(product_id)
+
+    response = {
+        "statusCode": 200,
+        "body": json.dumps(f"Product found successfully {product.to_dict()}!"),
     }
 
     return response

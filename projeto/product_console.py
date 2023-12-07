@@ -48,7 +48,6 @@ def get_input_product():
     image_path = input("Digite o caminho da imagem do livro: ")
 
     with open(image_path, "rb") as f:
-        #image: BytesIO = f.read()
         image = BytesIO(f.read())
         extension = os.path.splitext(f.name)[1]
         file_name = f"{id}{extension}"
