@@ -1,8 +1,10 @@
+from typing import List
 from entities.product import Product
 from interfaces.product_repository_interface import ProductRepositoryInterface
 
 
 class ProductMemoryRepository(ProductRepositoryInterface):
+    
     def __init__(self) -> None:
         self.products: list[Product] = []
 
@@ -16,6 +18,9 @@ class ProductMemoryRepository(ProductRepositoryInterface):
 
         return None
 
+    def get(self) -> List[Product]:
+        return self.products
+        
     def get_by_id(self, id: str) -> Product:
         for product in self.products:
             if product.id == id:
@@ -29,4 +34,3 @@ class ProductMemoryRepository(ProductRepositoryInterface):
                 del self.products[i]
                 return True
         return False
-    

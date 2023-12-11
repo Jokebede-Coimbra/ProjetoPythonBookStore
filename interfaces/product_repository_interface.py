@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import List
 
 from entities.product import Product
 
@@ -13,6 +14,10 @@ class ProductRepositoryInterface(ABC):
     def update(self, id: str, product: Product) -> bool:
         pass
 
+    @abstractmethod
+    def get(self) -> List[Product]:
+        pass
+    
     @abstractmethod
     def get_by_id(self, id: str) -> Product:
         pass

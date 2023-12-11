@@ -1,4 +1,5 @@
 from io import BytesIO
+from typing import List
 
 from entities.product import Product
 from interfaces.product_image_interface import ProductImageInterface
@@ -24,6 +25,9 @@ class ProductService:
             return True
 
         return None
+    
+    def get (self) -> List[Product]:
+        return self.product_repository_interface.get()
     
     def get_by_id(self, id: str) -> Product:
         return self.product_repository_interface.get_by_id(id)

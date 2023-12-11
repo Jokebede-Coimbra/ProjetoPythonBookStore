@@ -20,7 +20,7 @@ product_service: ProductService = ProductService(
 )
 product_facade: ProductFacade = ProductFacade(product_service)
 
-
+    
 def insert_handler(event, context):
     body = json.loads(event["body"])
 
@@ -61,14 +61,15 @@ def insert_handler(event, context):
 def update_handler(event, context):
     body = json.loads(event["body"])
 
-    id = body.get("Id")
+    product_id = body.get("Id")
     file_name = body.get("file_name")
+    
     product_dict = {
-        "Id": id,
-        "Name": body.get("name"),
-        "Rating": str(body.get("rating")),
-        "Author": body.get("author"),
-        "Price": str(body.get("price")),
+        "Id": product_id,
+        "Name": body["name"],
+        "Rating": str(body["rating"]),
+        "Author": body["author"],
+        "Price": str(body["price"]),
         "FileName": file_name,
     }
 
@@ -77,7 +78,7 @@ def update_handler(event, context):
         image = base64.b64decode(base64_image)
 
     product = Product(
-        id,
+        product_id,
         product_dict.get("Name"),
         product_dict.get("Author"),
         product_dict.get("Rating"),
@@ -85,7 +86,7 @@ def update_handler(event, context):
         product_dict.get("FileName"),
     )
 
-    product_facade.update(id, product, image)
+    product_facade.update(product_id, product, image)
 
     response = {
         "statusCode": 200,
@@ -94,6 +95,24 @@ def update_handler(event, context):
 
     return response
 
+def get_handler(event, context):
+    products = product_facade.get()
+    
+    product_dicts = []
+    for product in products: 
+        product_dict = product.to_dict()
+        
+        for key, value in product_dict.items():
+            if isinstance(value, Decimal):
+                product_dict[key] = float(value)
+        product_dicts.append(product_dict)
+
+    response = {
+        "statusCode": 200,
+        "body": json.dumps(product_dicts),
+    }
+
+    return response
 
 def get_by_id_handler(event, context):
     product_id = event["pathParameters"]["id"]

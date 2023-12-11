@@ -18,25 +18,26 @@ product_service: ProductService = ProductService(
     product_dynamodb_repository, product_s3_repository
 )
 product_facade: ProductFacade = ProductFacade(product_service)
-'''
+"""
 product_memory_repository: ProductMemoryRepository = ProductMemoryRepository()
-product_local_image_repository: ProductLocalImageRepository = ProductLocalImageRepository()
+product_local_image_repository: ProductLocalImageRepository = (
+    ProductLocalImageRepository()
+)
 product_service: ProductService = ProductService(
-    product_memory_repository, product_local_image_repository)
+    product_memory_repository, product_local_image_repository
+)
 product_facade: ProductFacade = ProductFacade(product_service)
-'''
-
+"""
 
 def display_menu():
     print("========================")
     print("*****CattleyaBooks*****")
     print("1. Adicionar Livro")
     print("2. Atualizar Livro")
-    print("3. Remover Livro")
-    print("4. Sair")
+    print("3. Listar Livro")
+    print("4. Remover Livro")
+    print("5. Sair")
     print("========================")
-
-   
 
 
 def get_input_product():
@@ -85,6 +86,19 @@ while True:
                 print("Erro ao atualizar o livro.")
 
         case "3":
+            print("Listando os livros: ")
+            list_product = product_facade.get()
+
+            if list_product:
+                for product in list_product:
+                    print(
+                        f"ID: {product.id},\nName: {product.name},\nAuthor: {product.author},\nRating: {product.rating},\nPrice: {product.price},\nFileName: {product.file_name}"
+                    )
+                print("Listagem de livros bem-sucedida!")
+            else:
+                print("Erro ao listar os livros.")
+
+        case "4":
             id = input("Digite o ID do livro que deseja remover: ")
             deleted_product = product_facade.delete(id)
 
@@ -93,7 +107,7 @@ while True:
             else:
                 print("Erro ao remover o livro.")
 
-        case "4":
+        case "5":
             print("CattleyaBooks agradece! Até a próxima")
             break
         case _:
