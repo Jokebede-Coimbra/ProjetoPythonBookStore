@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from facades.product_facade import ProductFacade
 from services.product_service import ProductService
 from repositories.product_dynamodb_repository import ProductDynamodbRepository
@@ -21,7 +21,7 @@ def home():
 @app.route('/products')
 def get():
     response = product_facade.get()
-    return response
+    return  jsonify(response)
 
 @app.route("/")
 def version():

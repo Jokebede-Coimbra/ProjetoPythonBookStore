@@ -66,7 +66,7 @@ class ProductDynamodbRepository(ProductRepositoryInterface):
                 item.get("price"),
                 item.get("file_name"),
             )
-            print(products.append(product))
+            products.append(product.to_dict())
         
         return products
        
