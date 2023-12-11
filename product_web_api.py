@@ -21,7 +21,7 @@ def home():
 @app.route('/products')
 def get():
     response = product_facade.get()
-    return  jsonify(response)
+    return  response
 
 @app.route("/")
 def version():
