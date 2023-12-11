@@ -1,23 +1,16 @@
 from flask import Flask
-import logging
-import os
+from facades.product_facade import ProductFacade
+from services.product_service import ProductService
+from repositories.product_dynamodb_repository import ProductDynamodbRepository
+from repositories.product_s3_repository import ProductS3Repository
 
-import boto3
-'''
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-region: str = os.environ.get("sa-east-1")
-bucket_name: str = os.environ.get("images-books-labs")
-table_name: str = os.environ.get("Books")
-s3_client = boto3.client('s3')
-dynamodb_client = boto3.resource("dynamodb", region_name=region)
-table = dynamodb_client.Table(table_name)
-'''
-dynamodb = boto3.resource('dynamodb')
-s3_client = boto3.client('s3')
-table_name = 'Books'
-bucket_name = 'images-books-labs'
-table = dynamodb.Table(table_name)
+product_dynamodb_repository: ProductDynamodbRepository = ProductDynamodbRepository()
+product_s3_repository: ProductS3Repository = ProductS3Repository()
+product_service: ProductService = ProductService(
+    product_dynamodb_repository, product_s3_repository
+)
+product_facade: ProductFacade = ProductFacade(product_service)
+
 
 app = Flask(__name__)
 
@@ -25,11 +18,9 @@ app = Flask(__name__)
 def home():
     return '*****CattleyaBooks*****'
 
-@app.route('/products', methods=['GET'])
+@app.route('/products')
 def get():
-    
-    data = table.scan()
-    response = data["Items"]
+    response = product_facade.get()
     return response
 
 @app.route("/")
