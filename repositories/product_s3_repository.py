@@ -1,18 +1,21 @@
-import boto3
+import os
 from io import BytesIO
+
+import boto3
 
 from interfaces.product_image_interface import ProductImageInterface
 
+
 class ProductS3Repository(ProductImageInterface):
-    
-    def __init__(self, bucket_name='images-books-labs', aws_region='sa-east-1'):
-        self.bucket_name = bucket_name
+    BUCKET_NAME = os.environ.get("bucketName")
+
+    def __init__(self, aws_region='sa-east-1'):
         self.aws_region = aws_region
         self.s3_client = boto3.client('s3', region_name=self.aws_region)
 
     def put(self, file_name: str, image: BytesIO) -> None:
         self.s3_client.put_object(
-            Bucket=self.bucket_name,
+            Bucket=ProductS3Repository.BUCKET_NAME,
             Key=file_name,
             Body=image
         )
@@ -22,6 +25,6 @@ class ProductS3Repository(ProductImageInterface):
 
     def remove(self, file_name: str) -> None:
         self.s3_client.delete_object(
-            Bucket=self.bucket_name,
+            Bucket=ProductS3Repository.BUCKET_NAME,
             Key=file_name
         )

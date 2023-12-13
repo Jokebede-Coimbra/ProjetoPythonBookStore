@@ -1,14 +1,18 @@
-import boto3
+import os
 from decimal import Decimal
-from interfaces.product_repository_interface import ProductRepositoryInterface
+
+import boto3
+
 from entities.product import Product
+from interfaces.product_repository_interface import ProductRepositoryInterface
 
 
 class ProductDynamodbRepository(ProductRepositoryInterface):
-    def __init__(self, table_name="Books", region_name="sa-east-1") -> None:
+    TABLE_NAME = os.environ.get("tableName")
+
+    def __init__(self, region_name="sa-east-1") -> None:
         self.dynamodb = boto3.resource("dynamodb", region_name=region_name)
-        self.table_name = table_name
-        self.table = self.dynamodb.Table(self.table_name)
+        self.table = self.dynamodb.Table(ProductDynamodbRepository.TABLE_NAME)
 
     def append(self, custom_table: Product) -> None:
         response = self.table.put_item(Item=custom_table.to_dict())
