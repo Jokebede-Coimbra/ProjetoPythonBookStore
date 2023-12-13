@@ -1,8 +1,9 @@
 from flask import Flask, jsonify
+
 from facades.product_facade import ProductFacade
-from services.product_service import ProductService
 from repositories.product_dynamodb_repository import ProductDynamodbRepository
 from repositories.product_s3_repository import ProductS3Repository
+from services.product_service import ProductService
 
 product_dynamodb_repository: ProductDynamodbRepository = ProductDynamodbRepository()
 product_s3_repository: ProductS3Repository = ProductS3Repository()
@@ -23,7 +24,7 @@ def get():
     response = product_facade.get()
     return  response
 
-@app.route("/")
+@app.route("/version")
 def version():
     return "v1.0.0.0"
 
