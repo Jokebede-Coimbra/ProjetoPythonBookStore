@@ -27,7 +27,12 @@ class ProductService:
         return None
     
     def get (self) -> List[Product]:
-        return self.product_repository_interface.get()
+        products = self.product_repository_interface.get()
+
+        for product in products:
+            product.file_name = product.get_address()
+
+        return products
     
     def get_by_id(self, id: str) -> Product:
         return self.product_repository_interface.get_by_id(id)

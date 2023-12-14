@@ -1,3 +1,6 @@
+import os
+
+
 class Product:
     def __init__(self, id: str, name: str, author: str, rating: int, price: float, file_name: str) -> None:
         self.id = id
@@ -6,6 +9,9 @@ class Product:
         self.rating = rating
         self.price = price
         self.file_name = file_name
+
+    def get_address(self) -> str:
+        return f"https://{os.environ.get('bucketName')}.s3.sa-east-1.amazonaws.com/{self.file_name}"
 
     def to_dict(self) -> dict:
         return {

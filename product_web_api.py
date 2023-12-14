@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask, jsonify
 
 from facades.product_facade import ProductFacade
@@ -15,18 +17,32 @@ product_facade: ProductFacade = ProductFacade(product_service)
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def home():
     return '*****CattleyaBooks*****'
 
+
 @app.route('/products')
 def get():
-    response = product_facade.get()
-    return  response
+    products = product_facade.get()
+
+    products_list = [{'id': product.id,
+                      'name': product.name,
+                      'author': product.author,
+                      'rating': product.rating,
+                      'file_name': product.file_name,
+                      'price': product.price} for product in products]
+
+    json_response = jsonify(products_list)
+
+    return json_response
+
 
 @app.route("/version")
 def version():
     return "v1.0.0.0"
+
 
 @app.get("/health")
 def health():
