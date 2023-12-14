@@ -64,16 +64,15 @@ class ProductDynamodbRepository(ProductRepositoryInterface):
         for item in items:
             product = Product(
                 item["Id"],
-                item.get("name"),
-                item.get("author"),
-                item.get("rating"),
-                item.get("price"),
-                item.get("file_name"),
+                item["name"],
+                item["author"],
+                item["rating"],
+                item["price"],
+                item["file_name"],
             )
-            products.append(product.to_dict())
+            products.append(product)
         
         return products
-       
 
     def get_by_id(self, id: str) -> Product:
         response = self.table.get_item(Key={"Id": id})
