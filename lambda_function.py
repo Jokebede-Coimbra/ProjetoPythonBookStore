@@ -24,7 +24,8 @@ product_facade: ProductFacade = ProductFacade(product_service)
 def insert_handler(event, context):
     body = json.loads(event["body"])
 
-    # file_name = body["fileName"]
+    extension = os.path.splitext(body["fileName"])[1]
+
     product_id = str(uuid.uuid4())
     product_dict = {
         "Id": product_id,
@@ -32,7 +33,7 @@ def insert_handler(event, context):
         "Rating": str(body["rating"]),
         "Author": body["author"],
         "Price": str(body["price"]),
-        "FileName": product_id,
+        "FileName": product_id + extension
     }
 
     base64_image = body.get("filebase64")

@@ -10,7 +10,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED=1
-ENV bucketName="books-images-939645320583"
+ENV bucketName="images-books-labs"
 ENV tableName="Books"
 
 # Install pip requirements
