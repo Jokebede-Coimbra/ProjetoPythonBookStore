@@ -20,7 +20,7 @@ product_service: ProductService = ProductService(
 )
 product_facade: ProductFacade = ProductFacade(product_service)
 
-    
+
 def insert_handler(event, context):
     body = json.loads(event["body"])
 
@@ -33,7 +33,7 @@ def insert_handler(event, context):
         "Rating": str(body["rating"]),
         "Author": body["author"],
         "Price": str(body["price"]),
-        "FileName": product_id + extension
+        "FileName": product_id + extension,
     }
 
     base64_image = body.get("filebase64")
@@ -64,7 +64,7 @@ def update_handler(event, context):
 
     product_id = body.get("Id")
     file_name = body.get("file_name")
-    
+
     product_dict = {
         "Id": product_id,
         "Name": body["name"],
@@ -96,13 +96,14 @@ def update_handler(event, context):
 
     return response
 
+
 def get_handler(event, context):
     products = product_facade.get()
-    
+
     product_dicts = []
-    for product in products: 
+    for product in products:
         product_dict = product.to_dict()
-        
+
         for key, value in product_dict.items():
             if isinstance(value, Decimal):
                 product_dict[key] = float(value)
@@ -115,14 +116,18 @@ def get_handler(event, context):
 
     return response
 
+
+
 def get_by_id_handler(event, context):
-    product_id = event["pathParameters"]["id"]
+    body = json.loads(event["body"])
+
+    product_id = body.get("pathParameters", {}).get("id", "")
 
     product = product_facade.get_by_id(product_id)
 
     response = {
         "statusCode": 200,
-        "body": json.dumps(f"Product found successfully {product.to_dict()}!"),
+        "body": json.dumps(f"Product found successfully {product}!"),
     }
 
     return response

@@ -81,12 +81,13 @@ class ProductDynamodbRepository(ProductRepositoryInterface):
         if item:
             return Product(
                 item["Id"],
-                item.get("name"),
-                item.get("author"),
-                item.get("rating"),
-                item.get("price"),
-                item.get("file_name"),
-            )
+                item["name"],
+                item["author"],
+                item["rating"],
+                item["price"],
+                item["file_name"],
+        )
+    
         return None
 
     def delete(self, id: str) -> None:
