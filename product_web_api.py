@@ -23,7 +23,7 @@ def home():
     return '*****CattleyaBooks*****'
 
 
-@app.route('/products')
+@app.get('/products')
 def get():
     products = product_facade.get()
 
@@ -35,6 +35,14 @@ def get():
                       'price': product.price} for product in products]
 
     json_response = jsonify(products_list)
+
+    return json_response
+
+@app.get('/products/<string:product_id>')
+def get_by_id(product_id):
+    product = product_facade.get_by_id(product_id)
+
+    json_response = jsonify(product)
 
     return json_response
 

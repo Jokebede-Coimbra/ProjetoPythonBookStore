@@ -97,42 +97,6 @@ def update_handler(event, context):
     return response
 
 
-def get_handler(event, context):
-    products = product_facade.get()
-
-    product_dicts = []
-    for product in products:
-        product_dict = product.to_dict()
-
-        for key, value in product_dict.items():
-            if isinstance(value, Decimal):
-                product_dict[key] = float(value)
-        product_dicts.append(product_dict)
-
-    response = {
-        "statusCode": 200,
-        "body": json.dumps(product_dicts),
-    }
-
-    return response
-
-
-
-def get_by_id_handler(event, context):
-    body = json.loads(event["body"])
-
-    product_id = body.get("pathParameters", {}).get("id", "")
-
-    product = product_facade.get_by_id(product_id)
-
-    response = {
-        "statusCode": 200,
-        "body": json.dumps(f"Product found successfully {product}!"),
-    }
-
-    return response
-
-
 def delete_handler(event, context):
     body = json.loads(event["body"])
 
