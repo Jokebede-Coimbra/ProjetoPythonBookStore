@@ -1,6 +1,7 @@
 import json
 
 from flask import Flask, jsonify
+from flask_cors import CORS
 
 from facades.product_facade import ProductFacade
 from repositories.product_dynamodb_repository import ProductDynamodbRepository
@@ -16,6 +17,8 @@ product_facade: ProductFacade = ProductFacade(product_service)
 
 
 app = Flask(__name__)
+
+CORS(app, resources={r"/*": {"origins": "*", "headers": "*"}})
 
 
 @app.route('/')
