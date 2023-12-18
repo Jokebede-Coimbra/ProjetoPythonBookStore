@@ -22,3 +22,6 @@ class Product:
             'price': self.price,
             'file_name': self.file_name
         }
+    
+    def __str__(self) -> str:
+        return self.name
