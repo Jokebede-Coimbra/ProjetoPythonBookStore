@@ -3,15 +3,15 @@ import json
 import logging
 import os
 import uuid
+from decimal import Decimal
+
 import boto3
 
-import json
-from decimal import Decimal
-from facades.product_facade import ProductFacade
 from entities.product import Product
-from services.product_service import ProductService
+from facades.product_facade import ProductFacade
 from repositories.product_dynamodb_repository import ProductDynamodbRepository
 from repositories.product_s3_repository import ProductS3Repository
+from services.product_service import ProductService
 
 product_dynamodb_repository: ProductDynamodbRepository = ProductDynamodbRepository()
 product_s3_repository: ProductS3Repository = ProductS3Repository()
@@ -20,6 +20,13 @@ product_service: ProductService = ProductService(
 )
 product_facade: ProductFacade = ProductFacade(product_service)
 
+
+def get_headers():
+    return {
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "*"
+    }
 
 def insert_handler(event, context):
     body = json.loads(event["body"])
@@ -52,8 +59,9 @@ def insert_handler(event, context):
     product_facade.create(product, image)
 
     response = {
-        "statusCode": 200,
-        "body": json.dumps(f"Product inserted successfully {product}!"),
+        'statusCode': 200,
+        'headers': get_headers(),
+        'body': json.dumps(f"Product inserted successfully {product}!")
     }
 
     return response
@@ -91,6 +99,7 @@ def update_handler(event, context):
 
     response = {
         "statusCode": 200,
+        'headers': get_headers(),
         "body": json.dumps(f"Product updated successfully {product}!"),
     }
 
@@ -106,6 +115,7 @@ def delete_handler(event, context):
 
     response = {
         "statusCode": 200,
+        'headers': get_headers(),
         "body": json.dumps(f"Product deleted successfully {product_id}!"),
     }
 
