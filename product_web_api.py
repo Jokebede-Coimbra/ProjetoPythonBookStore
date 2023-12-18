@@ -45,7 +45,7 @@ def get():
 def get_by_id(product_id):
     product = product_facade.get_by_id(product_id)
 
-    json_response = jsonify(product)
+    json_response = jsonify(product.to_dict())
 
     return json_response
 
