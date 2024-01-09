@@ -11,12 +11,13 @@ class ProductMemoryRepository(ProductRepositoryInterface):
     def append(self, product: Product) -> None:
         self.products.append(product)
 
-    def update(self, id: str, product: Product) -> None:
-        for product in self.products:
+    def update(self, id: str, product: Product) -> bool:
+        for i, product in enumerate(self.products):
             if product.id == id:
-                return product
+                self.products[i] = product
+                return True
 
-        return None
+        return False
 
     def get(self) -> List[Product]:
         return self.products

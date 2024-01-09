@@ -20,11 +20,17 @@ class ProductService:
 
     def update(self, id: str, updated_product: Product, updated_image: BytesIO):
         if self.product_repository_interface.update(id, updated_product):
-            self.product_image_interface.replace(
-               updated_product.file_name, updated_image)
+            old_product = self.product_repository_interface.get_by_id(id)
+            old_file_name = old_product.file_name
+            
+            if old_file_name != updated_product.file_name:
+                self.product_image_interface.remove(old_file_name)
+
+            self.product_image_interface.replace(updated_product.file_name, updated_image)
             return True
 
         return None
+
     
     def get (self) -> List[Product]:
         products = self.product_repository_interface.get()
