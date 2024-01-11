@@ -39,6 +39,10 @@ A arquitetura do projeto segue o padrão de camadas (n-layer), dividindo a aplic
 
 *O AWS Lambda é utilizado para a execução de funções serverless, proporcionando uma abordagem eficiente para execução de código sem a necessidade de gerenciamento de servidores. Sua aplicação no projeto contribui para a escalabilidade e eficiência na execução de tarefas específicas.*
 
+**Docker:**
+
+*O Docker desempenha um papel essencial no processo, possibilitando a criação eficiente da imagem contendo todos os componentes necessários. Essa imagem é então implantada de maneira eficaz no Amazon ECS/Fargate, proporcionando uma abordagem padronizada e eficiente para a gestão de contêineres.*
+
 **Python**
 
 *É o backend principal da minha aplicação, feita em Python para ter experiência com o ecossistema python, garanto uma experiência rica e consistente.*
