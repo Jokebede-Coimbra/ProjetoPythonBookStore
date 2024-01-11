@@ -1,4 +1,4 @@
-# CattleyaBookStore
+# PythonBookStore
 
 O projeto em questão representa um sistema de biblioteca, construído sobre a arquitetura n-layer, com ênfase no desenvolvimento em Python e integração eficaz com diversos serviços da AWS. Trata-se de uma aplicação de gerenciamento, seguindo a lógica do CRUD (Create, Read, Update, Delete).
 
@@ -10,9 +10,14 @@ A arquitetura do projeto segue o padrão de camadas (n-layer), dividindo a aplic
 ![N-Layer](https://github.com/Jokebede-Coimbra/ProjetoPythonBookStore/assets/44805096/7a1aec09-8b32-4aed-a6b5-0a4ca027c237)
 
 ### Tecnologias e Serviços AWS Utilizados:
+<p float="left">
+<img align="center" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-plain.svg" alt="python" style="max-width:100%">
+<img align="center" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" alt="flask" style="max-width:100%">
+<img align="center" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS" style="max-width:100%">
+<img align="center" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg" alt="docker" style="max-width:100%">
+</p>
+
 ![CrudProject](https://github.com/Jokebede-Coimbra/ProjetoPythonBookStore/assets/44805096/d4b8436c-795a-43a7-8d85-91b3937b41df)
-
-
 
 
 **Amazon S3 (Simple Storage Service):**
