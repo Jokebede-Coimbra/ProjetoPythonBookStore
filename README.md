@@ -56,7 +56,9 @@ A arquitetura do projeto segue o padrão de camadas (n-layer), dividindo a aplic
 
 *O backend principal da minha aplicação é desenvolvido em Python, com especial destaque para o uso do framework Flask para a implementação da funcionalidade de leitura (read) no CRUD. Ao escolher Flask, busquei uma abordagem leve e eficiente para lidar com as operações de consulta, aproveitando a simplicidade e flexibilidade oferecidas por este framework.*
 
+## ⏳ Execução
 
+*https://documenter.getpostman.com/view/11507152/2s9YsMBXKN*
 
 ## Contribuição
 
